@@ -8,6 +8,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthenticationModule } from './authentication';
+import { AppRoutingModule } from './app-routing.module';
+import { GravatarModule } from 'ngx-gravatar';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 let firebaseConfig = {
     apiKey: "AIzaSyBnTppV8YvdxSzEU3-FHL7AU_2Y8j2apr4",
@@ -20,12 +26,18 @@ let firebaseConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AuthenticationModule,
+    GravatarModule,
+    MDBBootstrapModule.forRoot(),
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
