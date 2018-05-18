@@ -9,7 +9,7 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { User, UserImpl } from '../../model';
+import { User, UserImpl } from '../../../model';
 
 @Injectable()
 export class AuthenticationService {
