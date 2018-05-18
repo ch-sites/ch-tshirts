@@ -8,8 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { HomeComponent, LoginComponent } from './components';
 import { AuthenticationModule } from './module';
 import { AppRoutingModule } from './app-routing.module';
 import { GravatarModule } from 'ngx-gravatar';
