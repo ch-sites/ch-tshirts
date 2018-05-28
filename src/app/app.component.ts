@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from './authentication';
+import { AuthenticationService } from './module/authentication';
 
 @Component({
   selector: 'app-root',
