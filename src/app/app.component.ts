@@ -7,13 +7,10 @@ import { AuthenticationService } from './module/authentication';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ChTshirts';
-  currentUser;
+    title = 'ChTshirts';
+    currentUser;
 
-  constructor(
-        private authenticationService: AuthenticationService
-        ) {
-
+    constructor(private authenticationService: AuthenticationService) {
         authenticationService.user$.subscribe(user => {
             if (user) {
                 this.currentUser = user;
@@ -24,6 +21,6 @@ export class AppComponent {
     }
 
     public signOut() {
-      this.authenticationService.signOut();
+        this.authenticationService.signOut();
     }
 }
