@@ -1,6 +1,6 @@
 <ngx-datatable
 class="material"
-[rows]="users | async"
+[rows]="users$ | async"
 [columns]="columns"
 [columnMode]="'force'"
 [headerHeight]="50"
@@ -13,7 +13,7 @@ class="material"
     <ngx-datatable-column name="First Name">
         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span>
-                <a [routerLink]="['/edit-user', row._id]">{{value}}</a>
+                <a [routerLink]="['../edit-user', row._id]">{{value}}</a>
             </span>
         </ng-template>
     </ngx-datatable-column>
@@ -21,7 +21,7 @@ class="material"
     <ngx-datatable-column name="Last Name">
         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span>
-                <a [routerLink]="['/edit-user', row._id]">{{value}}</a>
+                <a [routerLink]="['../edit-user', row._id]">{{value}}</a>
             </span>
         </ng-template>
     </ngx-datatable-column>
@@ -29,7 +29,7 @@ class="material"
     <ngx-datatable-column name="Display Name">
         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span>
-                <a [routerLink]="['/edit-user', row._id]">{{value}}</a>
+                <a [routerLink]="['../edit-user', row._id]">{{value}}</a>
             </span>
         </ng-template>
     </ngx-datatable-column>
@@ -37,7 +37,7 @@ class="material"
     <ngx-datatable-column name="Email">
         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span>
-                <a [routerLink]="['/edit-user', row._id]">{{value}}</a>
+                <a [routerLink]="['../edit-user', row._id]">{{value}}</a>
             </span>
         </ng-template>
     </ngx-datatable-column>
@@ -45,7 +45,7 @@ class="material"
     <ngx-datatable-column name="Photo URL">
         <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
             <span>
-                <a [routerLink]="['/edit-user', row._id]">{{value}}</a>
+                <a [routerLink]="['../edit-user', row._id]">{{value}}</a>
             </span>
         </ng-template>
     </ngx-datatable-column>

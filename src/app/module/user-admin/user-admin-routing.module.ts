@@ -6,19 +6,21 @@ import { AdminUserComponent, EditUserComponent, ListUserComponent } from "./comp
 
 const userRoutes: Routes = [
     {
+        path: '',
+        redirectTo: 'admin-users',
+        pathMatch: 'full'
+    },
+    {
         path: "admin-users",
-        component: AdminUserComponent,
-        pathMatch: "full"
+        component: AdminUserComponent
     },
     {
         path: "edit-user/:id",
-        component: EditUserComponent,
-        pathMatch: "full"
+        component: EditUserComponent
     },
     {
         path: "list-user",
-        component: ListUserComponent,
-        pathMatch: "full"
+        component: ListUserComponent
     }
 ];
 
@@ -26,4 +28,4 @@ const userRoutes: Routes = [
     imports: [RouterModule.forChild(userRoutes)],
     exports: [RouterModule]
 })
-export class ZsUserRoutingModule {}
+export class UserAdminRoutingModule {}

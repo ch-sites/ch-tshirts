@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserImpl, UserService } from 'zs-core';
-import { Observable } from 'rxjs/Observable';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
 import { switchMap } from "rxjs/operators";
+
+import { User, UserImpl, UserService } from '../../../core';
+import { Role } from '../../../core/model/role';
+import { RoleService } from '../../../core/service/role';
 
 @Component({
     selector: 'edit-user',
@@ -13,15 +17,14 @@ import { switchMap } from "rxjs/operators";
 export class EditUserComponent implements OnInit {
     private user$: Observable<User>;
     private editedUser: User;
-    private id = 400;
-
+    private roles$: Observable<Role[]>;
     private userForm: FormGroup;
-
     private buttonAction = 'Create';
 
     constructor(
         private formBuilder: FormBuilder,
         private userService: UserService,
+        private roleService: RoleService,
         private activatedRoute: ActivatedRoute,
         private router: Router
     ) {}
@@ -35,6 +38,7 @@ export class EditUserComponent implements OnInit {
                 email: ['', Validators.required],
                 photoURL: ['', Validators.required],
                 roles: ['', Validators.required],
+                id: ['']
             }
         );
 
@@ -43,7 +47,11 @@ export class EditUserComponent implements OnInit {
             switchMap((params: ParamMap) => {
                 let id = params.get('id');
 
-                return this.userService.get(id);
+                if (id != '0') {
+                    return this.userService.get(id);
+                } else {
+                    return Observable.create();
+                }
             })
         );
 
@@ -55,42 +63,32 @@ export class EditUserComponent implements OnInit {
                     displayName: user.displayName,
                     email: user.email,
                     photoURL: user.photoURL,
-                    roles: user.roles
+                    roles: user.roles,
+                    id: user._id
                 });
     
                 this.editedUser = user;
                 this.buttonAction = 'Update';
             }
         });
+
+        this.roles$ = this.roleService.list();
     }
 
     private createUser(userModel: any) {
-        this.id += 10;
-        let user = new UserImpl({
-            lastName: userModel.lastName,
-            firstName: userModel.firstName,
-            displayName: userModel.displayName,
-            email: userModel.email,
-            photoURL: userModel.photoURL,
-            roles: userModel.roles,
-            _id: this.id.toString()
-        });
+        this.roleService.get(userModel.roles).subscribe((role) => {
+            let user = new UserImpl({...userModel, role: role});
 
-        this.userService.create(user);
+            this.userService.create(user);
+        });
     }
 
     private updateUser(userModel: any) {
-        let user = new UserImpl({
-            lastName: userModel.lastName,
-            firstName: userModel.firstName,
-            displayName: userModel.displayName,
-            email: userModel.email,
-            photoURL: userModel.photoURL,
-            roles: userModel.roles,
-            _id: userModel._id
-        });
+        this.roleService.get(userModel.roles).subscribe((role) => {
+            let user = new UserImpl({_id: userModel.id, ...userModel, roles: [role]});
 
-        this.userService.update(user);
+            this.userService.update(user);
+        });
     }
 
     private onSubmit() {
@@ -102,6 +100,6 @@ export class EditUserComponent implements OnInit {
             this.createUser(userModel);
         }
 
-        this.router.navigate(['/admin-users']);
+        this.router.navigate(['../']);
     }
 }

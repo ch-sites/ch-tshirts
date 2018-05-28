@@ -1,46 +1,50 @@
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" novalidate >
+    <input hidden formControlName="id">
+
     <p class="h5 text-center mb-4">New User</p>
 
     <div class="md-form">
-        <input placeholder="First Name" class="form-control" formControlName="firstName" minlength="4" maxlength="30"
+        <input class="form-control" formControlName="firstName" minlength="4" maxlength="30"
             id="firstName" type="text" autofocus mdbActive>
 
             <label for="firstName">First Name: </label>
     </div>
 
     <div class="md-form">    
-        <input placeholder="Last Name" class="form-control" formControlName="lastName" minlength="4" maxlength="30"
+        <input class="form-control" formControlName="lastName" minlength="4" maxlength="30"
             id="lastName" type="text" autofocus mdbActive>
 
         <label for="lastName">Last Name: </label>
     </div>
 
     <div class="md-form">    
-        <input placeholder="Display Name" class="form-control" formControlName="displayName" minlength="4" maxlength="30"
+        <input class="form-control" formControlName="displayName" minlength="4" maxlength="30"
             id="displayName" type="text" autofocus mdbActive>
 
         <label for="displayName">Display Name: </label>
     </div>
 
     <div class="md-form">    
-        <input placeholder="Email" class="form-control" formControlName="email" minlength="4" maxlength="30"
+        <input class="form-control" formControlName="email" minlength="4" maxlength="30"
             id="email" type="text" autofocus mdbActive>
 
         <label for="email">Email: </label>
     </div>
 
     <div class="md-form">    
-        <input placeholder="Photo URL" class="form-control" formControlName="photoURL" minlength="4" maxlength="30"
+        <input class="form-control" formControlName="photoURL" minlength="4" maxlength="200"
             id="photoURL" type="text" autofocus mdbActive>
 
         <label for="photoURL">Photo URL: </label>
     </div>
 
     <div class="md-form">
-        <ng-select [items]="roles$ | async" formControlName="roles" placeholder="Roles:" class="colorful-select dropdown-primary"
-            bindLabel="name" bindValue="_id" mdbActive>
+        <ng-select [items]="roles$ | async" formControlName="roles" class="colorful-select dropdown-primary"
+            [hideSelected]="true" [multiple]="true" [closeOnSelect]="false" bindLabel="name" bindValue="_id" id="roles" mdbActive>
         </ng-select>
+
+        <label for="roles">Roles: </label>
     </div>
 
     <div class="text-center">

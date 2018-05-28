@@ -8,11 +8,12 @@ import * as firebase from 'firebase';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from '../../core';
 
-import { User, UserImpl } from '../../../model';
 
 @Injectable()
 export class AuthenticationService {
+
 
     user$: Observable<User>;
     currentUser: User;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { User, UserService } from 'zs-core';
+import { Observable } from 'rxjs';
+import { User, UserService } from '../../../core';
 
 @Component({
   selector: 'list-user',
@@ -8,20 +8,19 @@ import { User, UserService } from 'zs-core';
   styleUrls: ['./list-user.scss']
 })
 export class ListUserComponent implements OnInit {
-
-  private users: Observable<User[]>;
+    private users$: Observable<User[]>;
     private selected = [];
     private columns = [
         { name: 'First Name' },
         { name: 'LastName ' },
-        { name: 'Display' },
+        { name: 'DisplayName' },
         { name: 'Email' }
     ];
 
     @Output() onSelect = new EventEmitter<User>();
 
     constructor(private userService: UserService) {
-        this.users = this.userService.list();
+        this.users$ = this.userService.list();
     }
 
     ngOnInit() {
