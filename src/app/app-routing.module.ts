@@ -16,6 +16,9 @@ const routes: Routes = [{
         path: 'login',
         component: LoginComponent,
         pathMatch: 'full'
+    }, {
+        path: 'admin',
+        loadChildren: './module/user-admin/user-admin.module#UserAdminModule'
     }
 ];
 
